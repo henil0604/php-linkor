@@ -139,8 +139,6 @@ if (isset($_GET['r'])) {
                 var textarea = document.createElement("textarea");
                 textarea.textContent = text;
                 textarea.style.position = "fixed"; // Prevent scrolling to bottom of page in Microsoft Edge.
-                textarea.style.width = "0px";
-                textarea.style.height = "0px";
                 document.body.appendChild(textarea);
                 textarea.select();
                 try {
