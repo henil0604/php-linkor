@@ -128,6 +128,11 @@ if (isset($_GET['r'])) {
     </div>
 
 
+    <footer class="fixed bottom-0 w-full bg-blue-100 h-12 flex items-center justify-center">
+        Powered By Example.com
+    </footer>
+
+
     <script>
         function copy(text) {
             if (window.clipboardData && window.clipboardData.setData) {
@@ -139,8 +144,6 @@ if (isset($_GET['r'])) {
                 var textarea = document.createElement("textarea");
                 textarea.textContent = text;
                 textarea.style.position = "fixed"; // Prevent scrolling to bottom of page in Microsoft Edge.
-                textarea.style.width = "0px";
-                textarea.style.height = "0px";
                 document.body.appendChild(textarea);
                 textarea.select();
                 try {
