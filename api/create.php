@@ -17,7 +17,9 @@ function get_host()
     else
         $url = "http://";
 
-    $url .= $_SERVER['HTTP_HOST'] . "/linker";
+
+    // Change the following line as you need and as your localhost url matches
+    $url .= $_SERVER['HTTP_HOST'] . "/linkor";
 
     return $url;
 }
@@ -40,12 +42,14 @@ function before_exit()
 register_shutdown_function("before_exit");
 
 if (empty($_SESSION['gwtoken'])) {
-    echo 'Getway token Missing, Please go to Home Page and then Submit the URL';
+    $responseData['status'] = "error";
+    $responseData['message'] = "Getway token Missing, Please go to Home Page and then Submit the URL";
     exit();
 }
 
 if (empty($_GET['url'])) {
-    echo "URL Missing";
+    $responseData['status'] = "error";
+    $responseData['message'] = "URL Missing";
     exit();
 }
 
@@ -61,15 +65,22 @@ $insert['sql'] = "INSERT INTO `links`(`original_url`, `url_id`, `created_by_ip`)
 $insert['result'] = mysqli_query($conn, $insert['sql']);
 
 if ($insert['result'] == false) {
+    $responseData['status'] = "error";
+    $responseData['message'] = "Failed To Create!";
+
+    $_SESSION['responseData'] = $responseData;
     echo 'Failed';
     exit();
 }
 
 
-$responseUrl .=  get_host() . '?r=' . $id . '';
+$responseUrl =  get_host() . '?r=' . $id . '';
 
 $responseData['status'] = "success";
-$responseData['message'] = 'Your URL: ' . $responseUrl . '';
+$responseData['message'] = 'Use this URL to Redirect users to Original URL';
+$responseData['responseUrl'] = $responseUrl;
+
+
 
 $_SESSION['responseData'] = $responseData;
 
