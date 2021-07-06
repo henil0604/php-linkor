@@ -58,7 +58,6 @@ $url = $_GET['url'];
 $ip = $_SERVER['REMOTE_ADDR'];
 $id = generateId();
 
-
 $insert = [];
 
 $insert['sql'] = "INSERT INTO `links`(`original_url`, `url_id`, `created_by_ip`) VALUES ('$url', '$id', '$ip')";
@@ -81,7 +80,8 @@ $responseData['message'] = 'Use this URL to Redirect users to Original URL';
 $responseData['responseUrl'] = $responseUrl;
 
 
-
 $_SESSION['responseData'] = $responseData;
+
+
 
 redirect(get_host() . "/");
